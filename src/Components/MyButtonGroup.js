@@ -3,7 +3,19 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Box from '@mui/material/Box';
 
+import { useState } from "react";
+
 function MyButtonGroup(params) {
+  const [count, setCount] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(true)
+
+  const switchDisabled =()=>{
+    if(isDisabled){
+      setIsDisabled(false)
+    }else{
+      setIsDisabled(true)
+    }
+  }
   return (
     <Box
       sx={{
@@ -14,9 +26,11 @@ function MyButtonGroup(params) {
       }}
     >
       <ButtonGroup variant="outlined" aria-label="vertical outlined button group" orientation="vertical">
-        <Button>Click:0</Button>
-        <Button>Clear</Button>
-        <Button>Disable</Button>
+        <Button  onClick={() => setCount(count + 1)}
+          disabled = {isDisabled}
+        >Click:{count}</Button>
+        <Button  onClick={()=>setCount(0)}>Clear</Button>
+        <Button  onClick={switchDisabled}>Disable</Button>
       </ButtonGroup>
     </Box>
   );
